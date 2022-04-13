@@ -5,7 +5,7 @@
 #ifndef UTILS_EXTRUSION_JUNCTION_H
 #define UTILS_EXTRUSION_JUNCTION_H
 
-#include "IntPoint.h"
+#include "curaengine-lite/IntPoint.h"
 
 namespace cura
 {

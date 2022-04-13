@@ -4,11 +4,11 @@
 #ifndef UTILS_POLYLINE_STITCHER_H
 #define UTILS_POLYLINE_STITCHER_H
 
-#include "polygon.h"
-#include "SparsePointGrid.h"
-#include "PolygonsPointIndex.h"
+#include "curaengine-lite/polygon.h"
+#include "curaengine-lite/SparsePointGrid.h"
+#include "curaengine-lite/PolygonsPointIndex.h"
 
-#include "SymmetricPair.h"
+#include "curaengine-lite/SymmetricPair.h"
 #include <unordered_set>
 #include <cassert>
 

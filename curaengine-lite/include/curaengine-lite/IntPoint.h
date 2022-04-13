@@ -18,10 +18,10 @@ Integer points are used to avoid floating point rounding errors, and because Cli
 #include <limits>
 #include <stdint.h>
 
-#include "Point3.h" //For applying Point3Matrices.
+#include "curaengine-lite/Point3.h" //For applying Point3Matrices.
 
 
-#include "../math.h" // for M_PI. Use relative path to avoid pulling <math.h>
+#include "curaengine-lite/math.h" // for M_PI. Use relative path to avoid pulling <math.h>
 
 #ifdef __GNUC__
 #define DEPRECATED(func) func __attribute__ ((deprecated))

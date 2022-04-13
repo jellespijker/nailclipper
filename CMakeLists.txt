@@ -24,6 +24,7 @@ set(SRC src/Clipper.cpp
 
 set(HDR
         include/NailClipper/Clipper.h
+        include/NailClipper/Concepts.h
         )
 
 add_library(NailClipper ${SRC} ${HDR})
@@ -45,15 +46,19 @@ target_include_directories(NailClipper
         src)
 
 option(ENABLE_TESTS "Build with unit test" ON)
+option(ENABLE_BENCHMARKS "Build with benchmarks" ON)
+if(ENABLE_TEST OR ENABLE_BENCHMARKS)
+    add_subdirectory(curaengine-lite)
+endif()
+
 if (ENABLE_TESTS)
     enable_testing()
     message("Building Tests")
     add_subdirectory(tests)
 endif ()
 
-option(ENABLE_BENCHMARKS "Build with benchmarks" ON)
+
 if (ENABLE_BENCHMARKS)
     message("Building Benchmarks")
-    add_subdirectory(curaengine-lite)
     add_subdirectory(benchmarks)
 endif ()

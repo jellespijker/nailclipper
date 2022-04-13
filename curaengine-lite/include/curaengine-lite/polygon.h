@@ -19,9 +19,9 @@
 
 #include <initializer_list>
 
-#include "Angle.h" //For angles between vertices.
-#include "Ratio.h"
-#include "IntPoint.h"
+#include "curaengine-lite/Angle.h" //For angles between vertices.
+#include "curaengine-lite/Ratio.h"
+#include "curaengine-lite/IntPoint.h"
 
 #define CHECK_POLY_ACCESS
 #ifdef CHECK_POLY_ACCESS

@@ -8,8 +8,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include "IntPoint.h"
-#include "SparseGrid.h"
+#include "curaengine-lite/IntPoint.h"
+#include "curaengine-lite/SparseGrid.h"
 
 namespace cura {
 

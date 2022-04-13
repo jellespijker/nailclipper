@@ -9,8 +9,8 @@
 #include <vector>
 #include <functional>
 
-#include "IntPoint.h"
-#include "SquareGrid.h"
+#include "curaengine-lite/IntPoint.h"
+#include "curaengine-lite/SquareGrid.h"
 
 namespace cura {
 

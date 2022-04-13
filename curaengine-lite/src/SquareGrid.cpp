@@ -1,9 +1,9 @@
 // Copyright (c) 2022 Ultimaker B.V.
 // CuraEngine is released under the terms of the AGPLv3 or higher.
 
-#include "SquareGrid.h"
+#include "curaengine-lite/SquareGrid.h"
 
-#include "LinearAlg2D.h"
+#include "curaengine-lite/LinearAlg2D.h"
 
 using namespace cura;
 

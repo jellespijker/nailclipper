@@ -4,7 +4,7 @@
 #ifndef UTILS_SQUARE_GRID_H
 #define UTILS_SQUARE_GRID_H
 
-#include "IntPoint.h"
+#include "curaengine-lite/IntPoint.h"
 
 #include <cassert>
 #include <unordered_map>

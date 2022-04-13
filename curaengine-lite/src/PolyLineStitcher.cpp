@@ -1,10 +1,10 @@
 // Copyright (c) 2022 Ultimaker B.V.
 // CuraEngine is released under the terms of the AGPLv3 or higher.
 
-#include "PolyLineStitcher.h"
+#include "curaengine-lite/PolyLineStitcher.h"
 
-#include "ExtrusionLine.h"
-#include "polygon.h"
+#include "curaengine-lite/ExtrusionLine.h"
+#include "curaengine-lite/polygon.h"
 
 namespace cura
 {

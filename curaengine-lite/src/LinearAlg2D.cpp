@@ -1,13 +1,13 @@
 // Copyright (c) 2022 Ultimaker B.V.
 // CuraEngine is released under the terms of the AGPLv3 or higher.
 
-#include "LinearAlg2D.h"
+#include "curaengine-lite/LinearAlg2D.h"
 
 #include <cmath> // atan2
 #include <cassert>
 #include <algorithm> // swap
 
-#include "IntPoint.h" // dot
+#include "curaengine-lite/IntPoint.h" // dot
 
 namespace cura
 {

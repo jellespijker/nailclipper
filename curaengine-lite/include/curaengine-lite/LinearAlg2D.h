@@ -4,7 +4,7 @@
 #ifndef UTILS_LINEAR_ALG_2D_H
 #define UTILS_LINEAR_ALG_2D_H
 
-#include "IntPoint.h"
+#include "curaengine-lite/IntPoint.h"
 
 namespace cura
 {

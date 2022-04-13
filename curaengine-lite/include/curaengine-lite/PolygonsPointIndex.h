@@ -6,8 +6,8 @@
 
 #include <vector>
 
-#include "IntPoint.h"
-#include "polygon.h"
+#include "curaengine-lite/IntPoint.h"
+#include "curaengine-lite/polygon.h"
 
 
 namespace cura

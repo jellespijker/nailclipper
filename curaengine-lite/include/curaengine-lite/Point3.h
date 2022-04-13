@@ -10,7 +10,7 @@
 #include <stdint.h> //For int32_t and int64_t.
 #include <type_traits> // for operations on any arithmetic number type
 
-#include "Coord_t.h"
+#include "curaengine-lite/Coord_t.h"
 
 
 namespace cura

@@ -5,8 +5,8 @@
 #ifndef UTILS_EXTRUSION_LINE_H
 #define UTILS_EXTRUSION_LINE_H
 
-#include "ExtrusionJunction.h"
-#include "polygon.h"
+#include "curaengine-lite/ExtrusionJunction.h"
+#include "curaengine-lite/polygon.h"
 
 namespace cura
 {

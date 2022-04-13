@@ -5,7 +5,7 @@
 #define ANGLE_H
 
 #include <cmath> //For fmod.
-#include "../math.h" //For M_PI.
+#include "curaengine-lite/math.h" //For M_PI.
 
 #define TAU (2.0 * M_PI)
 
