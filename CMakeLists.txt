@@ -25,6 +25,7 @@ set(SRC src/Clipper.cpp
 set(HDR
         include/NailClipper/Clipper.h
         include/NailClipper/Concepts.h
+        include/NailClipper/Types.h
         )
 
 add_library(NailClipper ${SRC} ${HDR})
