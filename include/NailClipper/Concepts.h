@@ -15,28 +15,28 @@ template<class T>
 concept Number = std::integral<T> || std::floating_point<T>;
 
 template<class T>
-concept Vector = std::ranges::range<T> && std::ranges::sized_range<T> && Number<typename T::value_type>;
+concept Vector = std::ranges::range<T> && Number<typename T::value_type>;
 
 template<class T>
 concept Point2D = Vector<T> && std::tuple_size_v<T> == 2;
 
 template<class T>
-concept Point3D = Vector<T> && std::tuple_size_v<T> == 2;
+concept Point3D = Vector<T> && std::tuple_size_v<T> == 3;
 
 template<class T>
-concept Line = std::ranges::range<T> && std::ranges::sized_range<T> && std::tuple_size_v<T> == 2 && (Point2D<T> || Point3D<T>);
+concept Line = std::ranges::range<T> && std::ranges::sized_range<T> && std::tuple_size_v<T> == 2 && (Point2D<typename T::value_type> || Point3D<typename T::value_type>);
 
 template<class T>
-concept Polyline = std::ranges::range<T> && (Point2D<T> || Point3D<T>);
+concept Polyline = std::ranges::range<T> && (Point2D<typename T::value_type> || Point3D<typename T::value_type>);
 
 template<class T>
 concept Polygon = Polyline<T>;  // TODO: write concept for close loop polyline
 
 template<class T>
-concept Face = std::ranges::range<T> && std::tuple_size_v<T> >= 3 && Point3D<T>;
+concept Face = std::ranges::range<T> && Point3D<typename T::value_type>;
 
 template<class T>
-concept TriangleFace = Face<T> && std::tuple_size_v<T> == 3;
+concept Mesh = std::ranges::range<T> && Face<typename T::value_type>;
 
 } // namespace nail
 
