@@ -8,7 +8,10 @@
 #include <optional>
 #include <string_view>
 
+#include <spdlog/spdlog.h>
+
 #include <ctre.hpp>
+
 #include <range/v3/all.hpp>
 #include <range/v3/range/conversion.hpp>
 #include <range/v3/view/chunk.hpp>
@@ -20,12 +23,30 @@
 namespace nail::mesh
 {
 
-Mesh auto importMesh(const std::filesystem::path& filename, const FileTypes& file_types = FileTypes::AUTODETECT);
-
-std::string readASCIISTL(const std::filesystem::path& filename);
+[[nodiscard]] std::string readASCIISTL(const std::filesystem::path& filename) noexcept;
 
 template<Number T>
-constexpr Mesh auto translateASCIISTL(std::string_view data)
+[[nodiscard]] Mesh auto importMesh(const std::filesystem::path& filename, const FileTypes& file_types = FileTypes::AUTODETECT)
+{
+    if (! exists(filename))
+    {
+        spdlog::error("File {} doesn't exist", filename.string());
+        return mesh_t<double>{};
+    }
+    spdlog::info("Reading file {}", filename.string());
+
+    if (file_types != FileTypes::STL_ASCII)
+    {
+        // TODO: implement autodetect for now assume ASCII STL
+        spdlog::error("Not yet implemented file type {}", static_cast<int>(file_types));
+    }
+    auto raw_data{ readASCIISTL(filename) };
+    std::string_view data_view{ raw_data };
+    return translateASCIISTL<T>(data_view);
+};
+
+template<Number T>
+[[nodiscard]] constexpr Mesh auto translateASCIISTL(std::string_view data)
 {
     namespace rg = ranges;
     namespace rv = ranges::views;
