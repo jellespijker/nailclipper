@@ -3,17 +3,20 @@
 
 #include <catch2/catch.hpp>
 
-#include <tuple>
-#include <vector>
-#include <any>
+#include <NailClipper/Clipper.h>
 
-#include "NailClipper/Clipper.h"
-#include <curaengine-lite/IntPoint.h>
-
-TEST_CASE("File extension", "[File operations]")
+TEST_CASE("point translation", "[point]")
 {
-    auto p1 = cura::Point {0, 0};
-    auto p2 = cura::Point {0, 100};
-    auto p3 = cura::Point {200, 0};
-    nail::polygon<cura::Point> poly {p1, p2, p3};
+    using namespace nail;
+    REQUIRE(true);
 }
+
+//#include <filesystem>
+//#include <NailClipper/Mesh/Mesh.h>
+//
+// TEST_CASE("Import ASCII STL", "[File operations]")
+//{
+//    using namespace nail::mesh;
+//    auto file = std::filesystem::current_path().append("test.stl");
+//    auto mesh = Mesh::importMesh(file);
+//}

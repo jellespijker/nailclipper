@@ -4,6 +4,7 @@
 from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain
 from conan.tools.layout import cmake_layout
+from conans import tools
 
 
 class NailClipperConan(ConanFile):
@@ -20,13 +21,15 @@ class NailClipperConan(ConanFile):
         "tests": [True, False],
         "benchmarks": [True, False],
         "shared": [True, False],
-        "fPIC": [True, False]
+        "fPIC": [True, False],
+        "with_mesh": [True, False]
     }
     default_options = {
         "tests": True,
         "benchmarks": True,
         "shared": True,
-        "fPIC": False
+        "fPIC": False,
+        "with_mesh": True
     }
     scm = {
         "type": "git",
@@ -46,6 +49,12 @@ class NailClipperConan(ConanFile):
         self.requires("range-v3/0.11.0")
         self.requires("fmt/8.1.1")
         self.requires("spdlog/1.10.0")
+        if self.options.with_mesh:
+            self.requires("ctre/3.6")
+
+    def validate(self):
+        if self.settings.compiler.get_safe("cppstd"):
+            tools.check_min_cppstd(self, 20)
 
     def layout(self):
         cmake_layout(self)
@@ -60,6 +69,7 @@ class NailClipperConan(ConanFile):
         tc = CMakeToolchain(self)
         tc.variables["ENABLE_TESTS"] = self.options.tests
         tc.variables["ENABLE_BENCHMARKS"] = self.options.benchmarks
+        tc.variables["WITH_MESH"] = self.options.with_mesh
         tc.generate()
 
     def build(self):

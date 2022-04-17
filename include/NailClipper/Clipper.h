@@ -10,8 +10,7 @@
 
 namespace nail
 {
-template<Point T>
-using polygon = std::vector<T>;
+
 }
 
 #endif // NailClipper_CLIPPER_H

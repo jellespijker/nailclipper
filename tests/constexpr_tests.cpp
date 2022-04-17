@@ -3,15 +3,15 @@
 
 #include <catch2/catch.hpp>
 
-constexpr unsigned int Factorial(unsigned int number) // NOLINT(misc-no-recursion)
-{
-    return number <= 1 ? number : Factorial(number - 1) * number;
-}
+#include <string_view>
 
-TEST_CASE("Factorials are computed with constexpr", "[factorial]")
+#include "NailClipper/Concepts.h"
+#include "NailClipper/Types.h"
+
+using namespace std::literals;
+
+TEST_CASE("Split a string view", "[split_view]")
 {
-    STATIC_REQUIRE(Factorial(1) == 1);
-    STATIC_REQUIRE(Factorial(2) == 2);
-    STATIC_REQUIRE(Factorial(3) == 6);
-    STATIC_REQUIRE(Factorial(10) == 3628800);
+    constexpr auto test = "Test 1\n Test2\n Test3"sv;
+    STATIC_REQUIRE(true);
 }

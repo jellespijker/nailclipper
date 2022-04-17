@@ -19,8 +19,7 @@ find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
 find_package(range-v3 REQUIRED)
 
-set(SRC src/Clipper.cpp
-        )
+set(SRC src/Clipper.cpp)
 
 set(HDR
         include/NailClipper/Clipper.h
@@ -28,16 +27,33 @@ set(HDR
         include/NailClipper/Types.h
         )
 
+option(WITH_MESH "Build with mesh support" ON)
+if (WITH_MESH)
+    message(STATUS "NailClipper: Compiling with Mesh Support")
+    list(APPEND SRC
+            src/Mesh.cpp
+            )
+    list(APPEND HDR
+            include/NailClipper/Mesh/Mesh.h
+            include/NailClipper/Mesh/FileTypes.h)
+    find_package(ctre REQUIRED)
+    target_compile_definitions(project_options INTERFACE WITH_MESH)
+endif ()
+
 add_library(NailClipper ${SRC} ${HDR})
 
 target_link_libraries(NailClipper
-        PRIVATE
+        PUBLIC
         project_options
+        range-v3::range-v3
+        PRIVATE
         project_warnings
         spdlog::spdlog
         fmt::fmt
-        range-v3::range-v3
         )
+if (${WITH_MESH})
+    target_link_libraries(NailClipper PUBLIC ctre::ctre)
+endif ()
 
 target_include_directories(NailClipper
         PUBLIC
@@ -53,13 +69,13 @@ if(ENABLE_TEST OR ENABLE_BENCHMARKS)
 endif()
 
 if (ENABLE_TESTS)
+    message(STATUS "NailClipper: Compiling with Tests")
     enable_testing()
-    message("Building Tests")
     add_subdirectory(tests)
 endif ()
 
 
 if (ENABLE_BENCHMARKS)
-    message("Building Benchmarks")
+    message(STATUS "NailClipper: Compiling with Benchmarks")
     add_subdirectory(benchmarks)
 endif ()
