@@ -4,6 +4,7 @@
 #ifndef NAILCLIPPER_TYPES_H
 #define NAILCLIPPER_TYPES_H
 
+#include <vector>
 #include <array>
 
 #include "NailClipper/Concepts.h"
@@ -11,14 +12,16 @@
 namespace nail
 {
 template<Number T>
-using point2d = std::array<T, 2>;
+using point2d_t = std::array<T, 2>;
 
 template<Number T>
-using point3d = std::array<T, 3>;
+using point3d_t = std::array<T, 3>;
 
 template<Number T>
-using triangle = std::array<point3d<T>, 3>;
+using face_t = std::vector<point3d_t<T>>;
 
+template<Number T>
+using mesh_t = std::vector<face_t<T>>;
 }
 
 
