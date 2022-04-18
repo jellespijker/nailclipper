@@ -3,11 +3,14 @@
 
 #include <benchmark/benchmark.h>
 
+#include <fmt/ranges.h>
 #include <spdlog/spdlog.h>
 
 #include "curaengine-lite/polygon.h"
 
+#include "NailClipper//Views/Points.h"
 #include "NailClipper/Clipper.h"
+#include <range/v3/all.hpp>
 
 static void bmClipperPolygonCreation(benchmark::State& state)
 {
@@ -19,6 +22,74 @@ static void bmClipperPolygonCreation(benchmark::State& state)
 }
 BENCHMARK(bmClipperPolygonCreation);
 
+static void bmPolygonSort(benchmark::State& state)
+{
+    using namespace nail;
+    polyline3d_t<double> l1{ { 5.0, 20.5, 10. },   { 10.0, 20., 20. },   { 15.0, 21.5, 30. }, { 5.0, 30.5, 10. }, { 10.0, 1., 20. },
+                             { 15.0, 21., 30. },   { 5.0, 1.5, 10. },    { 10.0, 5., 20. },   { 15.0, 6, 30. },   { 5.0, 20.5, 10. },
+                             { 10.0, 20., 20. },   { 15.0, 21.5, 30. },  { 5.0, 30.5, 10. },  { 10.0, 1., 20. },  { 15.0, 21., 30. },
+                             { 5.0, 1.5, 10. },    { 10.0, 5324., 20. }, { 15.0, 4, 30. },    { 5.0, 20.5, 10. }, { 10.0, 20., 20. },
+                             { 15.0, 21.5, 30. },  { 5.0, 32, 10. },     { 10.0, 2.3, 20. },  { 15.0, 21., 30. }, { 5.0, 1.57, 10. },
+                             { 10.0, 5.213, 20. }, { 15.0, 7, 30. } };
+    for (auto _ : state)
+    {
+        ranges::sort(l1, {}, [](auto p) { return p[1]; });
+    }
+}
+BENCHMARK(bmPolygonSort);
+
+static void bmPolygonFilter(benchmark::State& state)
+{
+    using namespace nail;
+    polyline3d_t<double> l1{ { 5.0, 20.5, 10. },   { 10.0, 20., 20. },   { 15.0, 21.5, 30. },  { 5.0, 30.5, 10. },   { 10.0, 1., 20. },
+                             { 15.0, 21., 30. },   { 5.0, 1.5, 10. },    { 10.0, 5., 20. },    { 15.0, 6, 30. },     { 5.0, 20.5, 10. },
+                             { 10.0, 20., 20. },   { 15.0, 21.5, 30. },  { 5.0, 30.5, 10. },   { 10.0, 1., 20. },    { 15.0, 21., 30. },
+                             { 5.0, 1.5, 10. },    { 10.0, 5324., 20. }, { 15.0, 4, 30. },     { 5.0, 20.5, 10. },   { 10.0, 20., 20. },
+                             { 15.0, 21.5, 30. },  { 5.0, 32, 10. },     { 10.0, 2.3, 20. },   { 15.0, 21., 30. },   { 5.0, 1.57, 10. },
+                             { 10.0, 5.213, 20. }, { 15.0, 7, 30. },     { 5.0, 20.5, 10. },   { 10.0, 20., 20. },   { 15.0, 21.5, 30. },
+                             { 5.0, 30.5, 10. },   { 10.0, 1., 20. },    { 15.0, 21., 30. },   { 5.0, 1.5, 10. },    { 10.0, 5., 20. },
+                             { 15.0, 6, 30. },     { 5.0, 20.5, 10. },   { 10.0, 20., 20. },   { 15.0, 21.5, 30. },  { 5.0, 30.5, 10. },
+                             { 10.0, 1., 20. },    { 15.0, 21., 30. },   { 5.0, 1.5, 10. },    { 10.0, 5324., 20. }, { 15.0, 4, 30. },
+                             { 5.0, 20.5, 10. },   { 10.0, 20., 20. },   { 15.0, 21.5, 30. },  { 5.0, 32, 10. },     { 10.0, 2.3, 20. },
+                             { 15.0, 21., 30. },   { 5.0, 1.57, 10. },   { 10.0, 5.213, 20. }, { 15.0, 7, 30. } };
+    for (auto _ : state)
+    {
+        auto x0 = l1 | nail::views::filterBetween(nail::views::Axis::Y, 5, 10) | ranges::to<polyline3d_t<double>>();
+        benchmark::DoNotOptimize(x0);
+        auto x1 = l1 | nail::views::filterBetween(nail::views::Axis::Y, 10, 15) | ranges::to<polyline3d_t<double>>();
+        benchmark::DoNotOptimize(x1);
+        auto x2 = l1 | nail::views::filterBetween(nail::views::Axis::Y, 15, 20) | ranges::to<polyline3d_t<double>>();
+        benchmark::DoNotOptimize(x2);
+    }
+}
+BENCHMARK(bmPolygonFilter);
+
+static void bmPolygonFilterAfterSort(benchmark::State& state)
+{
+    using namespace nail;
+    polyline3d_t<double> l1{ { 5.0, 20.5, 10. },   { 10.0, 20., 20. },   { 15.0, 21.5, 30. },  { 5.0, 30.5, 10. },   { 10.0, 1., 20. },
+                             { 15.0, 21., 30. },   { 5.0, 1.5, 10. },    { 10.0, 5., 20. },    { 15.0, 6, 30. },     { 5.0, 20.5, 10. },
+                             { 10.0, 20., 20. },   { 15.0, 21.5, 30. },  { 5.0, 30.5, 10. },   { 10.0, 1., 20. },    { 15.0, 21., 30. },
+                             { 5.0, 1.5, 10. },    { 10.0, 5324., 20. }, { 15.0, 4, 30. },     { 5.0, 20.5, 10. },   { 10.0, 20., 20. },
+                             { 15.0, 21.5, 30. },  { 5.0, 32, 10. },     { 10.0, 2.3, 20. },   { 15.0, 21., 30. },   { 5.0, 1.57, 10. },
+                             { 10.0, 5.213, 20. }, { 15.0, 7, 30. },     { 5.0, 20.5, 10. },   { 10.0, 20., 20. },   { 15.0, 21.5, 30. },
+                             { 5.0, 30.5, 10. },   { 10.0, 1., 20. },    { 15.0, 21., 30. },   { 5.0, 1.5, 10. },    { 10.0, 5., 20. },
+                             { 15.0, 6, 30. },     { 5.0, 20.5, 10. },   { 10.0, 20., 20. },   { 15.0, 21.5, 30. },  { 5.0, 30.5, 10. },
+                             { 10.0, 1., 20. },    { 15.0, 21., 30. },   { 5.0, 1.5, 10. },    { 10.0, 5324., 20. }, { 15.0, 4, 30. },
+                             { 5.0, 20.5, 10. },   { 10.0, 20., 20. },   { 15.0, 21.5, 30. },  { 5.0, 32, 10. },     { 10.0, 2.3, 20. },
+                             { 15.0, 21., 30. },   { 5.0, 1.57, 10. },   { 10.0, 5.213, 20. }, { 15.0, 7, 30. } };
+    for (auto _ : state)
+    {
+        ranges::sort(l1, {}, [](auto p) { return p[nail::views::Axis::Y]; });
+        auto x0 = l1 | nail::views::filterBetween(nail::views::Axis::Y, 5, 10) | ranges::to<polyline3d_t<double>>();
+        benchmark::DoNotOptimize(x0);
+        auto x1 = l1 | nail::views::filterBetween(nail::views::Axis::Y, 10, 15) | ranges::to<polyline3d_t<double>>();
+        benchmark::DoNotOptimize(x1);
+        auto x2 = l1 | nail::views::filterBetween(nail::views::Axis::Y, 15, 20) | ranges::to<polyline3d_t<double>>();
+        benchmark::DoNotOptimize(x2);
+    }
+}
+BENCHMARK(bmPolygonFilterAfterSort);
 
 #ifdef WITH_MESH
 
