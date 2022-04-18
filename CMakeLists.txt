@@ -46,9 +46,9 @@ target_link_libraries(NailClipper
         PUBLIC
         project_options
         range-v3::range-v3
+        spdlog::spdlog
         PRIVATE
         project_warnings
-        spdlog::spdlog
         fmt::fmt
         )
 if (${WITH_MESH})

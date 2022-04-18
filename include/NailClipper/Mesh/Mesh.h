@@ -23,6 +23,26 @@
 namespace nail::mesh
 {
 
+template<Number T>
+[[nodiscard]] constexpr Number auto toNumber(std::string_view view) noexcept
+{
+    T n;
+    std::from_chars(view.begin(), view.end(), n);
+    return n;
+}
+
+template<Number T>
+[[nodiscard]] constexpr Mesh auto translateASCIISTL(std::string_view data)
+{
+    auto vertexes = ctre::multiline_range<R"(\s+vertex\s([\-\d]*\.?\d*)\s([\-\d]*\.?\d*)\s([\-\d]*\.?\d*))">(data);
+    return vertexes
+         | ranges::views::transform(
+             [](auto point) {
+                 return point3d_t<T>{ toNumber<T>(get<1>(point)), toNumber<T>(get<2>(point)), toNumber<T>(get<3>(point)) };
+             })
+         | ranges::views::chunk(3) | ranges::to<mesh_t<T>>;
+}
+
 [[nodiscard]] std::string readASCIISTL(const std::filesystem::path& filename) noexcept;
 
 template<Number T>
@@ -44,36 +64,6 @@ template<Number T>
     std::string_view data_view{ raw_data };
     return translateASCIISTL<T>(data_view);
 };
-
-template<Number T>
-[[nodiscard]] constexpr Mesh auto translateASCIISTL(std::string_view data)
-{
-    namespace rg = ranges;
-    namespace rv = ranges::views;
-    mesh_t<T> mesh{};
-    for (auto loop : ctre::range<"loop.+?endloop">(data))
-    {
-        auto face = ctre::range<"[\\d\\.]+">(loop);
-        mesh.emplace_back(face
-                          | rv::transform(
-                            [](auto s)
-                            {
-                                T d;
-                                std::from_chars(s.begin(), s.end(), d);
-                                return d;
-                            })
-                          | rv::chunk(3)
-                          | rv::transform(
-                            [](auto point) {
-                                return point3d_t<T>{ static_cast<T>(*point.begin()), 3 };
-                            })
-                          | rg::to_vector);
-    }
-    // TODO: Handle exceptions thrown by from_chars
-    // TODO: Handle the creation of point3d_t gracefully
-
-    return mesh;
-}
 
 } // namespace nail::mesh
 

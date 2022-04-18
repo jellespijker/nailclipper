@@ -12,7 +12,7 @@ target_link_libraries(catch_main PRIVATE project_options)
 
 set(SRC_TEST tests.cpp)
 if (WITH_MESH)
-    list(APPEND SRC_TEST test_mesh.cpp)
+    list(APPEND SRC_TEST test_mesh.cpp test_stl.h)
     file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test.stl DESTINATION ${CMAKE_BINARY_DIR}/bin/)
 endif ()
 add_executable(tests ${SRC_TEST})
