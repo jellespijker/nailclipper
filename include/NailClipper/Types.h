@@ -17,6 +17,12 @@ using point2d_t = std::array<T, 2>;
 template<Number T>
 using point3d_t = std::array<T, 3>;
 
+template<Number T>
+using polyline2d_t = std::vector<point2d_t<T>>;
+
+template<Number T>
+using polyline3d_t = std::vector<point3d_t<T>>;
+
 #ifdef WITH_MESH
 template<Number T>
 using face_t = std::vector<point3d_t<T>>;
@@ -24,7 +30,7 @@ using face_t = std::vector<point3d_t<T>>;
 template<Number T>
 using mesh_t = std::vector<face_t<T>>;
 #endif
-}
+} // namespace nail
 
 
 #endif // NAILCLIPPER_TYPES_H

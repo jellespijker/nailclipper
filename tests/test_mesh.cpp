@@ -55,6 +55,19 @@ TEST_CASE("Import ASCII STL", "[File operations]")
     REQUIRE(mesh[0][1][0] == 88.0333);
     REQUIRE(mesh[0][1][1] == 18.7121);
     REQUIRE(mesh[0][1][2] == 0);
+    REQUIRE(mesh[0][2][0] == 88.0333);
+    REQUIRE(mesh[0][2][1] == 18.7121);
+    REQUIRE(mesh[0][2][2] == 5);
+
+    REQUIRE(mesh[14][0][0] == 9.40756);
+    REQUIRE(mesh[14][0][1] == 89.507);
+    REQUIRE(mesh[14][0][2] == 0);
+    REQUIRE(mesh[14][1][0] == -9.40756);
+    REQUIRE(mesh[14][1][1] == 89.507);
+    REQUIRE(mesh[14][1][2] == 5);
+    REQUIRE(mesh[14][2][0] == 9.40756);
+    REQUIRE(mesh[14][2][1] == 89.507);
+    REQUIRE(mesh[14][2][2] == 5);
 }
 
 TEST_CASE("Slice mesh", "[Mesh operations]")

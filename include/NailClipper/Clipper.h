@@ -4,9 +4,8 @@
 #ifndef NailClipper_CLIPPER_H
 #define NailClipper_CLIPPER_H
 
-#include <vector>
-
 #include "Concepts.h"
+#include "Types.h"
 
 namespace nail
 {

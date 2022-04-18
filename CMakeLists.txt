@@ -25,6 +25,7 @@ set(HDR
         include/NailClipper/Clipper.h
         include/NailClipper/Concepts.h
         include/NailClipper/Types.h
+        include/NailClipper/Views/Points.h
         )
 
 option(WITH_MESH "Build with mesh support" ON)
