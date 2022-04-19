@@ -186,7 +186,7 @@ function(enable_sanitizers project_name)
 
 endfunction()
 
-option(ENABLE_CPPCHECK "Enable static analysis with cppcheck" OFF)
+option(ENABLE_CPPCHECK "Enable static analysis with cppcheck" ON)
 option(ENABLE_CLANG_TIDY "Enable static analysis with clang-tidy" OFF)
 option(ENABLE_INCLUDE_WHAT_YOU_USE "Enable static analysis with include-what-you-use" OFF)
 
