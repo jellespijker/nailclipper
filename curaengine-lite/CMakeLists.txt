@@ -33,7 +33,7 @@ set(HDR ${CMAKE_CURRENT_SOURCE_DIR}/include/curaengine-lite/Angle.h
         )
 
 add_library(curaengine-lite SHARED ${SRC} ${HDR})
-target_link_libraries(curaengine-lite PRIVATE project_warnings project_options PUBLIC clipper::clipper spdlog::spdlog)
+target_link_libraries(curaengine-lite PRIVATE project_options PUBLIC clipper::clipper spdlog::spdlog)
 target_include_directories(curaengine-lite
         PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
