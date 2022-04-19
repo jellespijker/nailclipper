@@ -18,23 +18,23 @@ struct Axis
     static constexpr size_t Z = 2;
 };
 
-[[nodiscard]] constexpr auto higher(const size_t axis, const Point3D auto& point, const Number auto lower_limit)
+[[nodiscard]] inline constexpr auto higher(const size_t axis, const Point3D auto& point, const Number auto lower_limit)
 {
     return point[axis] > lower_limit;
 }
 
-[[nodiscard]] constexpr auto lower(const size_t axis, const Point3D auto& point, const Number auto upper_limit)
+[[nodiscard]] inline constexpr auto lower(const size_t axis, const Point3D auto& point, const Number auto upper_limit)
 {
     return point[axis] < upper_limit;
 }
 
-[[nodiscard]] constexpr auto
+[[nodiscard]] inline constexpr auto
   between(const size_t axis, const Point3D auto& point, const Number auto lower_limit, const Number auto upper_limit)
 {
     return higher(axis, point, lower_limit) && lower(axis, point, upper_limit);
 }
 
-[[nodiscard]] constexpr auto equal(const size_t axis, const Point3D auto& point, const Number auto value)
+[[nodiscard]] inline constexpr auto equal(const size_t axis, const Point3D auto& point, const Number auto value)
 {
     return point[axis] == value;
 }
