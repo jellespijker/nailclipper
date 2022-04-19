@@ -74,6 +74,4 @@ TEST_CASE("Slice mesh", "[Mesh operations]")
 {
 
     nail::Mesh auto mesh = nail::mesh::translateASCIISTL<double>(stl);
-    rg::for_each(mesh, [](auto f) { rg::for_each(f, [](auto v) { spdlog::info(v); }); });
-    //    spdlog::info(mesh);
 }
