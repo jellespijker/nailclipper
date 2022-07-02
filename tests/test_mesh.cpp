@@ -1,6 +1,8 @@
 // Copyright (c) 2022 Jelle Spijker
 // NailClipper is released under the terms of the AGPLv3 or higher
 
+#include <filesystem>
+
 #include <catch2/catch_all.hpp>
 
 #include <fmt/ranges.h>
@@ -10,6 +12,8 @@
 
 #include "test_stl.h"
 #include <NailClipper/Mesh/Mesh.h>
+
+auto resources_path = std::filesystem::path{ __FILE__ }.parent_path().append("resources");
 
 namespace rg = ranges;
 namespace rv = ranges::views;
@@ -41,7 +45,7 @@ TEST_CASE("Regex ASCII STL", "[File operations]")
 
 TEST_CASE("Import ASCII STL", "[File operations]")
 {
-    auto file = std::filesystem::current_path().append("test.stl");
+    auto file = resources_path.append("test.stl");
     const auto data = nail::mesh::readASCIISTL(file);
     std::string_view data_view{ data };
     nail::Mesh auto mesh = nail::mesh::translateASCIISTL<double>(data_view);
