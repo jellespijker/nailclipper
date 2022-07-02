@@ -17,6 +17,7 @@ set_project_warnings(project_warnings)
 find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
 find_package(range-v3 REQUIRED)
+find_package(rapidxml REQUIRED)
 
 set(SRC src/Clipper.cpp)
 
@@ -51,6 +52,7 @@ target_link_libraries(NailClipper
         PRIVATE
         project_warnings
         fmt::fmt
+        rapidxml::rapidxml
         )
 if (${WITH_MESH})
     target_link_libraries(NailClipper PUBLIC ctre::ctre)

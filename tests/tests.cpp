@@ -1,7 +1,7 @@
 // Copyright (c) 2022 Jelle Spijker
 // NailClipper is released under the terms of the AGPLv3 or higher
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_all.hpp>
 
 #include <NailClipper/Clipper.h>
 #include <NailClipper/Views/Points.h>
