@@ -30,6 +30,7 @@ set(HDR ${CMAKE_CURRENT_SOURCE_DIR}/include/curaengine-lite/Angle.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/curaengine-lite/SparsePointGrid.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/curaengine-lite/SquareGrid.h
         ${CMAKE_CURRENT_SOURCE_DIR}/include/curaengine-lite/SymmetricPair.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/curaengine-lite/Format.h
         )
 
 add_library(curaengine-lite SHARED ${SRC} ${HDR})
