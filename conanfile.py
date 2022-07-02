@@ -40,17 +40,17 @@ class NailClipperConan(ConanFile):
 
     def build_requirements(self):
         if self.options.tests:
-            self.tool_requires("catch2/2.13.8")
+            self.tool_requires("catch2/[>=2.13.8]")
         if self.options.benchmarks:
-            self.tool_requires("benchmark/1.6.1")
-            self.tool_requires("clipper/6.4.2")
+            self.tool_requires("benchmark/[>=1.6.1]")
+            self.tool_requires("clipper/[>=6.4.2]")
 
     def requirements(self):
-        self.requires("range-v3/0.11.0")
-        self.requires("fmt/8.1.1")
-        self.requires("spdlog/1.10.0")
+        self.requires("range-v3/[>=0.11.0]")
+        self.requires("fmt/[>=8.1.1]")
+        self.requires("spdlog/[>=1.10.0]")
         if self.options.with_mesh:
-            self.requires("ctre/3.6")
+            self.requires("ctre/[>=3.6]")
 
     def validate(self):
         if self.settings.compiler.get_safe("cppstd"):
