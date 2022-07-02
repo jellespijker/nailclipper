@@ -16,7 +16,7 @@ if (WITH_MESH)
     file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test.stl DESTINATION ${CMAKE_BINARY_DIR}/bin/)
 endif ()
 add_executable(tests ${SRC_TEST})
-target_link_libraries(tests PRIVATE project_options catch_main NailClipper)
+target_link_libraries(tests PRIVATE project_options catch_main NailClipper curaengine-lite)
 
 # automatically discover tests that are defined in catch based test files you can modify the unittests. Set TEST_PREFIX
 # to whatever you want, or use different for different binaries

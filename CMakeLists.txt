@@ -12,7 +12,6 @@ target_compile_features(project_options INTERFACE cxx_std_20)
 
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
 add_library(project_warnings INTERFACE)
-include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warnings)
 
 find_package(spdlog REQUIRED)
@@ -26,6 +25,7 @@ set(HDR
         include/NailClipper/Concepts.h
         include/NailClipper/Types.h
         include/NailClipper/Views/Points.h
+        include/NailClipper/Views/Slice.h
         )
 
 option(WITH_MESH "Build with mesh support" ON)

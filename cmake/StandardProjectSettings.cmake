@@ -1,22 +1,5 @@
 # Copyright (c) 2022 Jelle Spijker
 # NailClipper is released under the terms of the AGPLv3 or higher
-
-# Set a default build type if none was specified
-if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-    message(STATUS "Setting build type to 'RelWithDebInfo' as none was specified.")
-    set(CMAKE_BUILD_TYPE
-            RelWithDebInfo
-            CACHE STRING "Choose the type of build." FORCE)
-    # Set the possible values of build type for cmake-gui, ccmake
-    set_property(
-            CACHE CMAKE_BUILD_TYPE
-            PROPERTY STRINGS
-            "Debug"
-            "Release"
-            "MinSizeRel"
-            "RelWithDebInfo")
-endif()
-
 # Generate compile_commands.json to make it easier to work with clang based tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -35,15 +18,6 @@ if(ENABLE_IPO)
         message(SEND_ERROR "IPO is not supported: ${output}")
     endif()
 endif ()
-
-# DEFINE BINARY AND LIBS PATHS ACCORDING TO GNU STANDARDS
-include(GNUInstallDirs)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY
-        ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY
-        ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY
-        ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 
 # https://github.com/lefticus/cppbestpractices/blob/master/02-Use_the_Tools_Available.md
 function(set_project_warnings project_name)
@@ -197,11 +171,11 @@ if (ENABLE_CPPCHECK)
         set(CMAKE_CXX_CPPCHECK
                 ${CPPCHECK}
                 --suppress=missingInclude
+                --suppress=unusedFunction
                 --enable=all
                 --inline-suppr
                 --inconclusive
-                -i
-                ${CMAKE_SOURCE_DIR}/imgui/lib)
+                )
     else ()
         message(WARNING "cppcheck requested but executable not found")
     endif ()
