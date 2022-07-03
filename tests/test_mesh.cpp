@@ -2,6 +2,7 @@
 // NailClipper is released under the terms of the AGPLv3 or higher
 
 #include "test_stl.h"
+#include <NailClipper/Conversion.h>
 #include <NailClipper/Mesh/Mesh.h>
 #include <catch2/catch_all.hpp>
 #include <filesystem>
@@ -71,4 +72,15 @@ TEST_CASE("Slice mesh", "[Mesh operations]")
 {
 
     nail::Mesh auto mesh = nail::mesh::translateASCIISTL<double>(stl);
+}
+
+TEST_CASE("Mesh to VTU", "[IO operations]")
+{
+    auto resources_path = std::filesystem::path{ __FILE__ }.parent_path().append("resources");
+    auto file = resources_path.append("test.stl");
+    const auto data = nail::mesh::readASCIISTL(file);
+    std::string_view data_view{ data };
+    nail::Mesh auto mesh = nail::mesh::translateASCIISTL<double>(data_view);
+    auto vtu = nail::conversion::formatVTU(mesh);
+    vtu.save_file("mesh.vtu");
 }
