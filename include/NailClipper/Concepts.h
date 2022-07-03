@@ -24,19 +24,29 @@ template<class T>
 concept Point3D = Vector<T> && std::tuple_size_v<T> == 3;
 
 template<class T>
-concept Line = std::ranges::range<T> && std::ranges::sized_range<T> && std::tuple_size_v<T> == 2 && (Point2D<typename T::value_type> || Point3D<typename T::value_type>);
+concept Line = std::ranges::range<T> && std::ranges::sized_range<T> && std::tuple_size_v<T> == 2
+            && (Point2D<typename T::value_type> || Point3D<typename T::value_type>);
 
 template<class T>
 concept Polyline = std::ranges::range<T> && (Point2D<typename T::value_type> || Point3D<typename T::value_type>);
 
 template<class T>
-concept Polygon = Polyline<T>;  // TODO: write concept for close loop polyline
+concept Polygon = Polyline<T>; // TODO: write concept for close loop polyline
 
 template<class T>
 concept Face = std::ranges::range<T> && Point3D<typename T::value_type>;
 
 template<class T>
 concept Mesh = std::ranges::range<T> && Face<typename T::value_type>;
+
+template<class T>
+concept Cloud = std::ranges::range<T> && Point3D<typename T::value_type>;
+
+template<class T>
+concept GeometricData = Polygon<T> || Face<T> || Mesh<T> || Cloud<T>;
+
+template<class T>
+concept GeometricCollection = std::ranges::range<T> && GeometricData<typename T::value_type>;
 
 } // namespace nail
 
