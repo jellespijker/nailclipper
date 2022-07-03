@@ -6,7 +6,7 @@ find_package(Catch2 REQUIRED)
 include(CTest)
 include(Catch)
 
-set(SRC_TEST tests.cpp)
+set(SRC_TEST tests.cpp test_io.cpp)
 if (WITH_MESH)
     list(APPEND SRC_TEST test_mesh.cpp test_stl.h)
 endif ()

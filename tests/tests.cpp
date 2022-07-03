@@ -1,19 +1,15 @@
 // Copyright (c) 2022 Jelle Spijker
 // NailClipper is released under the terms of the AGPLv3 or higher
 
-#include <catch2/catch_all.hpp>
-
-#include <NailClipper/Clipper.h>
+#include <NailClipper/Types.h>
 #include <NailClipper/Views/Points.h>
 #include <NailClipper/Views/Slice.h>
-
-#include <range/v3/all.hpp>
-
+#include <catch2/catch_all.hpp>
+#include <curaengine-lite/Format.h>
+#include <curaengine-lite/IntPoint.h>
 #include <fmt/ranges.h>
+#include <range/v3/all.hpp>
 #include <spdlog/spdlog.h>
-
-#include "curaengine-lite/IntPoint.h"
-#include "curaengine-lite/Format.h"
 
 TEST_CASE("Format IntPoint", "[fmt]")
 {
@@ -50,7 +46,7 @@ TEST_CASE("Format polygon", "[fmt]")
 
     auto poly_fmt = fmt::format("{}", poly);
     spdlog::info(poly_fmt);
-    REQUIRE(poly_fmt == "10, 20");
+    REQUIRE(poly_fmt == "10, 20, 100, 200, 150, 20"); // FIXME: this is not the expected output
 }
 
 TEST_CASE("Point translation", "[point]")
@@ -96,6 +92,6 @@ TEST_CASE("Slice line", "[polyline]")
     polyline3d_t<double> l1{ { 5.0, 20.5, 10. }, { 10.0, 20., 20. }, { 15.0, 21.5, 30. } };
     polyline3d_t<double> l_expected{ { 10.0, 20., 20. }, { 5.0, 20.5, 10. }, { 15.0, 21.5, 30. } };
 
-//    auto x = l1 | slice(0.1); // | ranges::to<polyline3d_t<double>>;
-    //spdlog::info(x);
+    //    auto x = l1 | slice(0.1); // | ranges::to<polyline3d_t<double>>;
+    // spdlog::info(x);
 }

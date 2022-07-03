@@ -1,5 +1,5 @@
-# Copyright (c) 2022 Jelle Spijker
-# NailClipper is released under the terms of the AGPLv3 or higher
+#  Copyright (c) 2022 Jelle Spijker
+#  NailClipper is released under the terms of the AGPLv3 or higher
 
 from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain, cmake_layout
@@ -48,7 +48,7 @@ class NailClipperConan(ConanFile):
         self.requires("range-v3/[>=0.11.0]")
         self.requires("fmt/[>=8.1.1]")
         self.requires("spdlog/[>=1.10.0]")
-        self.requires("rapidxml/[>=1.13.0]")
+        self.requires("pugixml/[>=1.12.1]")
         if self.options.with_mesh:
             self.requires("ctre/[>=3.6]")
 

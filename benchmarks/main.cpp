@@ -1,16 +1,13 @@
 // Copyright (c) 2022 Jelle Spijker
 // NailClipper is released under the terms of the AGPLv3 or higher
 
+#include <NailClipper/Types.h>
+#include <NailClipper/Views/Points.h>
 #include <benchmark/benchmark.h>
-
+#include <curaengine-lite/polygon.h>
 #include <fmt/ranges.h>
-#include <spdlog/spdlog.h>
-
-#include "curaengine-lite/polygon.h"
-
-#include "NailClipper//Views/Points.h"
-#include "NailClipper/Clipper.h"
 #include <range/v3/all.hpp>
+#include <spdlog/spdlog.h>
 
 static void bmClipperPolygonCreation(benchmark::State& state)
 {

@@ -17,16 +17,17 @@ set_project_warnings(project_warnings)
 find_package(spdlog REQUIRED)
 find_package(fmt REQUIRED)
 find_package(range-v3 REQUIRED)
-find_package(rapidxml REQUIRED)
+find_package(pugixml REQUIRED)
 
-set(SRC src/Clipper.cpp)
+set(SRC)
 
 set(HDR
-        include/NailClipper/Clipper.h
         include/NailClipper/Concepts.h
         include/NailClipper/Types.h
         include/NailClipper/Views/Points.h
         include/NailClipper/Views/Slice.h
+        include/NailClipper/Conversion.h
+        include/NailClipper/Conversion/VTU.h
         )
 
 option(WITH_MESH "Build with mesh support" ON)
@@ -43,16 +44,17 @@ if (WITH_MESH)
 endif ()
 
 add_library(NailClipper ${SRC} ${HDR})
+enable_sanitizers(NailClipper)
 
 target_link_libraries(NailClipper
         PUBLIC
         project_options
         range-v3::range-v3
         spdlog::spdlog
+        pugixml::pugixml
         PRIVATE
         project_warnings
         fmt::fmt
-        rapidxml::rapidxml
         )
 if (${WITH_MESH})
     target_link_libraries(NailClipper PUBLIC ctre::ctre)
