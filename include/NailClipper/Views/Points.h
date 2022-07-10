@@ -68,5 +68,10 @@ struct Axis
     return translated_point;
 }
 
+[[maybe_unused, nodiscard]] constexpr auto translate(const Point auto& vector, const Polygon auto& polygon)
+{
+    return polygon | ranges::views::transform([&vector](const auto& point) { return translate(vector, point); });
+}
+
 } // namespace nail::views
 #endif // NAILCLIPPER_POINTS_H

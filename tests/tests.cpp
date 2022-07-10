@@ -120,3 +120,21 @@ TEST_CASE("Translate point", "[point]")
         REQUIRE(p == p_e);
     }
 }
+
+TEST_CASE("Translate polygon", "[polygon]")
+{
+    using namespace nail;
+    using namespace nail::views;
+    polygon2d_t<> poly{ { 5.0, 20.5 }, { 10.0, 20. }, { 15.0, 21.5 } };
+    polygon2d_t<> poly_expected{ { 6.0, 22.5 }, { 11.0, 22. }, { 16.0, 23.5 } };
+    point2d_t<> vector2d{ 1., 2. };
+
+    auto translated_polygon = translate(vector2d, poly);
+    for (auto [point, point_e] : ranges::views::zip(translated_polygon, poly_expected))
+    {
+        for (auto [p, p_e] : ranges::views::zip(point, point_e))
+        {
+            REQUIRE(p == p_e);
+        }
+    }
+}
