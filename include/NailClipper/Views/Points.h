@@ -4,9 +4,10 @@
 #ifndef NAILCLIPPER_POINTS_H
 #define NAILCLIPPER_POINTS_H
 
-#include <range/v3/view/filter.hpp>
-
 #include "NailClipper/Concepts.h"
+#include <range/v3/view/filter.hpp>
+#include <range/v3/view/transform.hpp>
+#include <range/v3/view/zip.hpp>
 #include <spdlog/spdlog.h>
 
 namespace nail::views
@@ -58,6 +59,13 @@ struct Axis
 [[maybe_unused, nodiscard]] constexpr auto filterEqual(const size_t axis, const Number auto value)
 {
     return ranges::views::filter([axis, value](const Point3D auto& point) { return equal(axis, point, value); });
+}
+
+[[maybe_unused, nodiscard]] constexpr auto translate(const Point auto& vector, const Point auto& point)
+{
+    auto translated_point =
+      ranges::views::zip(point, vector) | ranges::views::transform([](const auto& pair) { return pair.first + pair.second; });
+    return translated_point;
 }
 
 } // namespace nail::views

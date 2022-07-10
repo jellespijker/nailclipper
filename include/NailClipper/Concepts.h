@@ -24,6 +24,9 @@ template<class T>
 concept Point3D = Vector<T> && std::tuple_size_v<T> == 3;
 
 template<class T>
+concept Point = Point2D<T> || Point3D<T>;
+
+template<class T>
 concept Line = std::ranges::range<T> && std::ranges::sized_range<T> && std::tuple_size_v<T> == 2
             && (Point2D<typename T::value_type> || Point3D<typename T::value_type>);
 

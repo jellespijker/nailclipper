@@ -95,3 +95,28 @@ TEST_CASE("Slice line", "[polyline]")
     //    auto x = l1 | slice(0.1); // | ranges::to<polyline3d_t<double>>;
     // spdlog::info(x);
 }
+
+TEST_CASE("Translate point", "[point]")
+{
+    using namespace nail;
+    using namespace nail::views;
+    point2d_t<> point2d{ 10.0, 20. };
+    point2d_t<> vector2d{ 1., 2. };
+    point2d_t<> point2d_expected{ 11., 22. };
+
+    auto translated_point2d = translate(vector2d, point2d);
+    for (auto [p, p_e] : ranges::views::zip(translated_point2d, point2d_expected))
+    {
+        REQUIRE(p == p_e);
+    }
+
+    point3d_t<> point3d{ 10.0, 20., 30. };
+    point3d_t<> vector3d{ -1., -2., -3. };
+    point3d_t<> point3d_expected{ 9., 18., 27. };
+
+    auto translated_point3d = translate(vector3d, point3d);
+    for (auto [p, p_e] : ranges::views::zip(translated_point3d, point3d_expected))
+    {
+        REQUIRE(p == p_e);
+    }
+}
