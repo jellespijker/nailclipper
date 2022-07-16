@@ -27,6 +27,9 @@ set(HDR
         include/NailClipper/Types/Point.h
         include/NailClipper/Views/Points.h
         include/NailClipper/Views/Slice.h
+        include/NailClipper/Views/Transform.h
+        include/NailClipper/Views/Translate.h
+        include/NailClipper/Views/Scale.h
         include/NailClipper/Conversion.h
         include/NailClipper/Conversion/VTU.h
         )
