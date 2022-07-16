@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "NailClipper/Concepts.h"
+#include "NailClipper/Types/Point.h"
 
 namespace nail
 {

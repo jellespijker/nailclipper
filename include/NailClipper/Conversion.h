@@ -6,6 +6,7 @@
 
 #include "NailClipper/Concepts.h"
 #include "NailClipper/Conversion/VTU.h"
+#include <range/v3/all.hpp>
 #include <range/v3/distance.hpp>
 #include <range/v3/view/join.hpp>
 #include <spdlog/spdlog.h>
@@ -13,9 +14,10 @@
 namespace nail::conversion
 {
 
-auto formatVTU(const GeometricCollection auto& data)
+auto formatVTU(GeometricCollection auto data)
 {
     spdlog::info("Converting to VTU");
+    //    auto data_ = data | ranges::v3::to_vector;  // FIXME: why do I need to_vector here?
     auto doc = detail::vtkFileDoc("UnstructuredGrid");
     // TODO: Assert if GeometricCollection is indeed a collection of GeometricData
     auto points_view = data | ranges::view::join;

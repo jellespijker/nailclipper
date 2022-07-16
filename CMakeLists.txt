@@ -24,6 +24,7 @@ set(SRC)
 set(HDR
         include/NailClipper/Concepts.h
         include/NailClipper/Types.h
+        include/NailClipper/Types/Point.h
         include/NailClipper/Views/Points.h
         include/NailClipper/Views/Slice.h
         include/NailClipper/Conversion.h
@@ -79,8 +80,13 @@ if (ENABLE_TESTS)
     add_subdirectory(tests)
 endif ()
 
-
 if (ENABLE_BENCHMARKS)
     message(STATUS "NailClipper: Compiling with Benchmarks")
     add_subdirectory(benchmarks)
+endif ()
+
+option(ENABLE_PLAYGROUND "Build with playground" ON)
+if (ENABLE_PLAYGROUND)
+    message(STATUS "NailClipper: Compiling with Playground")
+    add_subdirectory(playground)
 endif ()

@@ -52,7 +52,7 @@ auto vtkPoints(pugi::xml_document& doc, const auto& points_view)
     auto root = doc.child("VTKFile").first_child().first_child();
     auto points = root.append_child("Points");
     auto points_data = points.append_child("DataArray");
-    points_data.append_attribute("type") = "Float32"; // TODO : determine from underlying type in GeometricCollection
+    points_data.append_attribute("type") = "Float64"; // TODO : determine from underlying type in GeometricCollection
     points_data.append_attribute("Name") = "Points";
     points_data.append_attribute("NumberOfComponents") = "3";
     auto coordinate_view = points_view | ranges::view::join; // TODO: pad z = 0 if 2D

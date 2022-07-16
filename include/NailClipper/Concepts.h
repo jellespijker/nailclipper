@@ -4,10 +4,10 @@
 #ifndef NAILCLIPPER_CONCEPTS_H
 #define NAILCLIPPER_CONCEPTS_H
 
+#include <concepts/concepts.hpp>
 #include <concepts>
-#include <type_traits>
-
 #include <ranges>
+#include <type_traits>
 
 namespace nail
 {
@@ -49,7 +49,7 @@ template<class T>
 concept GeometricData = Polygon<T> || Face<T> || Mesh<T> || Cloud<T>;
 
 template<class T>
-concept GeometricCollection = std::ranges::range<T> && GeometricData<typename T::value_type>;
+concept GeometricCollection = std::ranges::range<T>; // && GeometricData<typename T::value_type>;
 
 } // namespace nail
 
