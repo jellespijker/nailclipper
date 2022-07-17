@@ -1,20 +1,21 @@
 // Copyright (c) 2022 Jelle Spijker
 // NailClipper is released under the terms of the AGPLv3 or higher
 
-#include <NailClipper/Conversion.h>
-#include <NailClipper/Types.h>
-#include <NailClipper/Views/Points.h>
+#include <NailClipper/conversion.h>
+#include <NailClipper/types.h>
+#include <NailClipper/views/filter.h>
 #include <catch2/catch_all.hpp>
 #include <catch2/matchers/catch_matchers_string.hpp>
 #include <pugixml.hpp>
 #include <range/v3/all.hpp>
 #include <range/v3/view/zip.hpp>
+#include <source_location>
 #include <spdlog/spdlog.h>
 #include <vector>
 
 TEST_CASE("Write Polygon", "[IO operations]")
 {
-    auto resources_path = std::filesystem::path{ __FILE__ }.parent_path().append("resources");
+    auto resources_path = std::filesystem::path{ std::source_location::current().file_name() }.parent_path().append("resources");
 
     spdlog::set_level(spdlog::level::debug);
 

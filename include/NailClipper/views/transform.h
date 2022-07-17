@@ -4,7 +4,8 @@
 #ifndef NAILCLIPPER_TRANSFORM_H
 #define NAILCLIPPER_TRANSFORM_H
 
-#include "NailClipper/Concepts.h"
+#include "NailClipper/concepts.h"
+
 #include <range/v3/view.hpp>
 
 namespace nail::views
@@ -26,7 +27,7 @@ namespace detail
             adaptor() = default;
             adaptor(const Vec& vec, ranges::semiregular_box_t<Proj> proj) : vec_{ vec }, proj_{ proj } {};
 
-            inline constexpr auto read(ranges::iterator_t<Rng> it) const
+            [[maybe_unused, nodiscard]] inline constexpr auto read(ranges::iterator_t<Rng> it) const
             {
                 return ranges::views::zip(*it, vec_)
                      | ranges::views::transform([&](const auto& pair) { return std::invoke(proj_, pair.first, pair.second); });
@@ -58,7 +59,7 @@ namespace detail
     }
 } // namespace detail
 
-inline constexpr auto transform(Point auto& vec, auto&& proj)
+constexpr auto transform(Point auto& vec, auto&& proj)
 {
     return ranges::make_view_closure(
       [&vec, &proj](auto&& rng)

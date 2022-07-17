@@ -4,11 +4,10 @@
 #ifndef NAILCLIPPER_TYPES_H
 #define NAILCLIPPER_TYPES_H
 
+#include "NailClipper/concepts.h"
+
 #include <array>
 #include <vector>
-
-#include "NailClipper/Concepts.h"
-#include "NailClipper/Types/Point.h"
 
 namespace nail
 {

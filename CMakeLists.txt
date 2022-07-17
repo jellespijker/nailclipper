@@ -22,27 +22,32 @@ find_package(pugixml REQUIRED)
 set(SRC)
 
 set(HDR
-        include/NailClipper/Concepts.h
-        include/NailClipper/Types.h
-        include/NailClipper/Types/Point.h
-        include/NailClipper/Views/Points.h
-        include/NailClipper/Views/Slice.h
-        include/NailClipper/Views/Transform.h
-        include/NailClipper/Views/Translate.h
-        include/NailClipper/Views/Scale.h
-        include/NailClipper/Conversion.h
-        include/NailClipper/Conversion/VTU.h
+        include/NailClipper/concepts.h
+
+        include/NailClipper/types.h
+
+        include/NailClipper/functional/compare.h
+
+        include/NailClipper/views/transform.h
+        include/NailClipper/views/translate.h
+        include/NailClipper/views/rotate.h
+        include/NailClipper/views/scale.h
+        include/NailClipper/views/partition.h
+        include/NailClipper/views/sort.h
+
+        include/NailClipper/conversion.h
+        include/NailClipper/conversion/vtu.h
         )
 
 option(WITH_MESH "Build with mesh support" ON)
 if (WITH_MESH)
     message(STATUS "NailClipper: Compiling with Mesh Support")
     list(APPEND SRC
-            src/Mesh.cpp
+            src/mesh.cpp
             )
     list(APPEND HDR
-            include/NailClipper/Mesh/Mesh.h
-            include/NailClipper/Mesh/FileTypes.h)
+            include/NailClipper/mesh/mesh.h
+            include/NailClipper/mesh/filetypes.h)
     find_package(ctre REQUIRED)
     target_compile_definitions(project_options INTERFACE WITH_MESH)
 endif ()

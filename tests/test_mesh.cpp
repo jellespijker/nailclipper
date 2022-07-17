@@ -2,11 +2,13 @@
 // NailClipper is released under the terms of the AGPLv3 or higher
 
 #include "test_stl.h"
-#include <NailClipper/Conversion.h>
-#include <NailClipper/Mesh/Mesh.h>
+
+#include <NailClipper/conversion.h>
+#include <NailClipper/mesh/mesh.h>
 #include <catch2/catch_all.hpp>
 #include <filesystem>
 #include <range/v3/all.hpp>
+#include <source_location>
 
 namespace rg = ranges;
 namespace rv = ranges::views;
@@ -38,7 +40,7 @@ TEST_CASE("Regex ASCII STL", "[File operations]")
 
 TEST_CASE("Import ASCII STL", "[File operations]")
 {
-    auto resources_path = std::filesystem::path{ __FILE__ }.parent_path().append("resources");
+    auto resources_path = std::filesystem::path{ std::source_location::current().file_name() }.parent_path().append("resources");
     auto file = resources_path.append("test.stl");
     const auto data = nail::mesh::readASCIISTL(file);
     std::string_view data_view{ data };
@@ -76,7 +78,7 @@ TEST_CASE("Slice mesh", "[Mesh operations]")
 
 TEST_CASE("Mesh to VTU", "[IO operations]")
 {
-    auto resources_path = std::filesystem::path{ __FILE__ }.parent_path().append("resources");
+    auto resources_path = std::filesystem::path{ std::source_location::current().file_name() }.parent_path().append("resources");
     auto file = resources_path.append("test.stl");
     const auto data = nail::mesh::readASCIISTL(file);
     std::string_view data_view{ data };

@@ -4,7 +4,8 @@
 #ifndef NAILCLIPPER_VTU_H
 #define NAILCLIPPER_VTU_H
 
-#include "NailClipper/Concepts.h"
+#include "NailClipper/concepts.h"
+
 #include <filesystem>
 #include <fmt/format.h>
 #include <fmt/ranges.h>

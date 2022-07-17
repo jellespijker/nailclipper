@@ -6,7 +6,7 @@
 
 namespace nail::mesh
 {
-enum struct FileTypes
+enum struct filetypes
 {
     AUTODETECT,
     STL_ASCII,

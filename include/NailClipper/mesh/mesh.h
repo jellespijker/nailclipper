@@ -4,49 +4,46 @@
 #ifndef NAILCLIPPER_MESH_H
 #define NAILCLIPPER_MESH_H
 
-#include <filesystem>
-#include <optional>
-#include <string_view>
-
-#include <spdlog/spdlog.h>
+#include "NailClipper/mesh/filetypes.h"
+#include "NailClipper/types.h"
 
 #include <ctre.hpp>
-
+#include <filesystem>
+#include <optional>
 #include <range/v3/all.hpp>
 #include <range/v3/range/conversion.hpp>
 #include <range/v3/view/chunk.hpp>
 #include <range/v3/view/transform.hpp>
-
-#include "NailClipper/Mesh/FileTypes.h"
-#include <NailClipper/Types.h>
+#include <spdlog/spdlog.h>
+#include <string_view>
 
 namespace nail::mesh
 {
 
 template<Number T>
-[[nodiscard]] constexpr Number auto toNumber(std::string_view view) noexcept
+[[nodiscard]] constexpr Number auto to_number(std::string_view view) noexcept
 {
-    T n;
-    std::from_chars(view.begin(), view.end(), n);
-    return n;
+    T number;
+    std::from_chars(view.begin(), view.end(), number);
+    return number;
 }
 
 template<Number T>
-[[nodiscard]] constexpr Mesh auto translateASCIISTL(std::string_view data)
+[[nodiscard]] constexpr Mesh auto translate_asciistl(std::string_view data)
 {
     auto vertexes = ctre::multiline_range<R"(\s+vertex\s([\-\d]*\.?\d*)\s([\-\d]*\.?\d*)\s([\-\d]*\.?\d*))">(data);
     return vertexes
          | ranges::views::transform(
              [](auto point) {
-                 return point3d_t<T>{ toNumber<T>(get<1>(point)), toNumber<T>(get<2>(point)), toNumber<T>(get<3>(point)) };
+                 return point3d_t<T>{ to_number<T>(get<1>(point)), to_number<T>(get<2>(point)), to_number<T>(get<3>(point)) };
              })
          | ranges::views::chunk(3) | ranges::to<mesh_t<T>>;
 }
 
-[[nodiscard]] std::string readASCIISTL(const std::filesystem::path& filename) noexcept;
+[[nodiscard]] std::string read_asciistl(const std::filesystem::path& filename) noexcept;
 
 template<Number T>
-[[nodiscard]] Mesh auto importMesh(const std::filesystem::path& filename, const FileTypes& file_types = FileTypes::AUTODETECT)
+[[nodiscard]] Mesh auto import_mesh(const std::filesystem::path& filename, const filetypes& file_types = filetypes::AUTODETECT)
 {
     if (! exists(filename))
     {
@@ -55,12 +52,12 @@ template<Number T>
     }
     spdlog::info("Reading file {}", filename.string());
 
-    if (file_types != FileTypes::STL_ASCII)
+    if (file_types != filetypes::STL_ASCII)
     {
         // TODO: implement autodetect for now assume ASCII STL
         spdlog::error("Not yet implemented file type {}", static_cast<int>(file_types));
     }
-    auto raw_data{ readASCIISTL(filename) };
+    auto raw_data{ read_asciistl(filename) };
     std::string_view data_view{ raw_data };
     return translateASCIISTL<T>(data_view);
 };

@@ -1,13 +1,12 @@
 // Copyright (c) 2022 Jelle Spijker
 // NailClipper is released under the terms of the AGPLv3 or higher
 
+#include "NailClipper/mesh/mesh.h"
+
 #include <fstream>
 #include <ranges>
-#include <string_view>
-
 #include <spdlog/spdlog.h>
-
-#include "NailClipper/Mesh/Mesh.h"
+#include <string_view>
 
 
 using namespace std::literals;
@@ -15,7 +14,7 @@ using namespace std::literals;
 namespace nail::mesh
 {
 
-[[nodiscard]] std::string readASCIISTL(const std::filesystem::path& filename) noexcept
+[[nodiscard]] std::string read_asciistl(const std::filesystem::path& filename) noexcept
 {
     std::ifstream file{ filename };
     std::string raw_data;

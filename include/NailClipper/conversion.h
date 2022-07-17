@@ -4,8 +4,9 @@
 #ifndef NAILCLIPPER_CONVERSION_H
 #define NAILCLIPPER_CONVERSION_H
 
-#include "NailClipper/Concepts.h"
-#include "NailClipper/Conversion/VTU.h"
+#include "NailClipper/concepts.h"
+#include "NailClipper/conversion/vtu.h"
+
 #include <range/v3/all.hpp>
 #include <range/v3/distance.hpp>
 #include <range/v3/view/join.hpp>
@@ -14,7 +15,7 @@
 namespace nail::conversion
 {
 
-auto formatVTU(GeometricCollection auto data)
+auto format_vtu(GeometricCollection auto data)
 {
     spdlog::info("Converting to VTU");
     //    auto data_ = data | ranges::v3::to_vector;  // FIXME: why do I need to_vector here?

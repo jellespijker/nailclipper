@@ -1,9 +1,9 @@
 // Copyright (c) 2022 Jelle Spijker
 // NailClipper is released under the terms of the AGPLv3 or higher
 
-#include <NailClipper/Conversion.h>
-#include <NailClipper/Types.h>
-#include <NailClipper/Views/Points.h>
+#include <NailClipper/conversion.h>
+#include <NailClipper/types.h>
+#include <NailClipper/views/filter.h>
 #include <catch2/catch_all.hpp>
 #include <curaengine-lite/Format.h>
 #include <curaengine-lite/IntPoint.h>
