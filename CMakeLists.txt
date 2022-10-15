@@ -28,12 +28,17 @@ set(HDR
 
         include/NailClipper/functional/compare.h
 
-        include/NailClipper/views/transform.h
-        include/NailClipper/views/translate.h
-        include/NailClipper/views/rotate.h
+        include/NailClipper/views/elem_wise_op.h
         include/NailClipper/views/scale.h
-        include/NailClipper/views/partition.h
-        include/NailClipper/views/sort.h
+        include/NailClipper/views/translate.h
+
+
+        #        include/NailClipper/views/transform.h
+        #
+        #        include/NailClipper/views/rotate.h
+        #
+        #        include/NailClipper/views/partition.h
+        #        include/NailClipper/views/sort.h
 
         include/NailClipper/conversion.h
         include/NailClipper/conversion/vtu.h
@@ -90,7 +95,7 @@ endif ()
 
 if (ENABLE_BENCHMARKS)
     message(STATUS "NailClipper: Compiling with Benchmarks")
-    add_subdirectory(benchmarks)
+    #    add_subdirectory(benchmarks)
 endif ()
 
 option(ENABLE_PLAYGROUND "Build with playground" ON)

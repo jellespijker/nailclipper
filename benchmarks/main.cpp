@@ -60,12 +60,12 @@ static void bm_polygon_filter(benchmark::State& state)
                              { 15.0, 21., 30. },   { 5.0, 1.57, 10. },   { 10.0, 5.213, 20. }, { 15.0, 7, 30. } };
     for (auto _ : state)
     {
-        auto x0 = l1 | nail::views::filter_between(nail::views::Axis::Y, 5, 10) | ranges::to<polyline3d_t<double>>();
-        benchmark::DoNotOptimize(x0);
-        auto x1 = l1 | nail::views::filter_between(nail::views::Axis::Y, 10, 15) | ranges::to<polyline3d_t<double>>();
-        benchmark::DoNotOptimize(x1);
-        auto x2 = l1 | nail::views::filter_between(nail::views::Axis::Y, 15, 20) | ranges::to<polyline3d_t<double>>();
-        benchmark::DoNotOptimize(x2);
+        //        auto x0 = l1 | nail::views::filter_between(nail::views::Axis::Y, 5, 10) | ranges::to<polyline3d_t<double>>();
+        //        benchmark::DoNotOptimize(x0);
+        //        auto x1 = l1 | nail::views::filter_between(nail::views::Axis::Y, 10, 15) | ranges::to<polyline3d_t<double>>();
+        //        benchmark::DoNotOptimize(x1);
+        //        auto x2 = l1 | nail::views::filter_between(nail::views::Axis::Y, 15, 20) | ranges::to<polyline3d_t<double>>();
+        //        benchmark::DoNotOptimize(x2);
     }
 }
 BENCHMARK(bm_polygon_filter);
@@ -86,13 +86,13 @@ static void bm_polygon_filter_after_sort(benchmark::State& state)
                              { 15.0, 21., 30. },   { 5.0, 1.57, 10. },   { 10.0, 5.213, 20. }, { 15.0, 7, 30. } };
     for (auto _ : state)
     {
-        ranges::sort(l1, {}, [](auto p) { return p[nail::views::Axis::Y]; });
-        auto x0 = l1 | nail::views::filter_between(nail::views::Axis::Y, 5, 10) | ranges::to<polyline3d_t<double>>();
-        benchmark::DoNotOptimize(x0);
-        auto x1 = l1 | nail::views::filter_between(nail::views::Axis::Y, 10, 15) | ranges::to<polyline3d_t<double>>();
-        benchmark::DoNotOptimize(x1);
-        auto x2 = l1 | nail::views::filter_between(nail::views::Axis::Y, 15, 20) | ranges::to<polyline3d_t<double>>();
-        benchmark::DoNotOptimize(x2);
+        //        ranges::sort(l1, {}, [](auto p) { return p[nail::views::Axis::Y]; });
+        //        auto x0 = l1 | nail::views::filter_between(nail::views::Axis::Y, 5, 10) | ranges::to<polyline3d_t<double>>();
+        //        benchmark::DoNotOptimize(x0);
+        //        auto x1 = l1 | nail::views::filter_between(nail::views::Axis::Y, 10, 15) | ranges::to<polyline3d_t<double>>();
+        //        benchmark::DoNotOptimize(x1);
+        //        auto x2 = l1 | nail::views::filter_between(nail::views::Axis::Y, 15, 20) | ranges::to<polyline3d_t<double>>();
+        //        benchmark::DoNotOptimize(x2);
     }
 }
 BENCHMARK(bm_polygon_filter_after_sort);
@@ -107,7 +107,7 @@ static void bm_read_asciistl(benchmark::State& state)
     auto file = std::filesystem::current_path().append("test.stl");
     for (auto _ : state)
     {
-        const auto data = nail::mesh::readASCIISTL(file);
+        //        const auto data = nail::mesh::readASCIISTL(file);
     }
 }
 BENCHMARK(bm_read_asciistl);
@@ -116,7 +116,7 @@ static void bm_translate_asciistl(benchmark::State& state)
 {
     for (auto _ : state)
     {
-        nail::Mesh auto mesh = nail::mesh::translateASCIISTL<double>(stl);
+        //        nail::Mesh auto mesh = nail::mesh::translateASCIISTL<double>(stl);
     }
 }
 BENCHMARK(bm_translate_asciistl);
@@ -127,7 +127,7 @@ static void bm_import_asciistl(benchmark::State& state)
     auto file = std::filesystem::current_path().append("test.stl");
     for (auto _ : state)
     {
-        nail::Mesh auto mesh = nail::mesh::importMesh<double>(file, nail::mesh::FileTypes::STL_ASCII);
+        //        nail::Mesh auto mesh = nail::mesh::importMesh<double>(file, nail::mesh::FileTypes::STL_ASCII);
     }
 }
 BENCHMARK(bm_import_asciistl);
