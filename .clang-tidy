@@ -1,4 +1,3 @@
-
 ---
 Checks: >
   *,
@@ -10,7 +9,8 @@ Checks: >
   -fuchsia-overloaded-operator,
   -google-readability-todo,
   -altera-struct-pack-align,
-  -android-*
+  -android-*,
+  llvm-header-guard
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
 FormatStyle: none
